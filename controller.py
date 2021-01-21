@@ -9,7 +9,7 @@ class Controller():
     def update(self):
        for event in pygame.event.get():
             if (event.type == pygame.KEYDOWN):
-                if (model.state == Gamestates.GAMEPLAY):
+                if (self.model.state == Gamestates.GAMEPLAY):
                     if (event.key == pygame.K_UP):
                         pass
                     elif (event.key == pygame.K_DOWN):
@@ -18,17 +18,17 @@ class Controller():
                         pass
                     elif (event.key == pygame.K_DOWN):
                         pass
-                if (model.state == Gamestates.MAIN_MENU):
+                if (self.model.state == Gamestates.MENU):
                     if (event.key == pygame.K_UP):
-                        pass
+                        self.model.menu.selectPrevious()
                     elif (event.key == pygame.K_DOWN):
-                        pass
+                        self.model.menu.selectNext()
                     elif (event.key == pygame.K_SPACE):
-                        pass
-                if (model.state == Gamestates.WIN):
+                        self.model.menuSelect()
+                if (self.model.state == Gamestates.WIN):
                     if (event.key == pygame.K_SPACE):
                         pass
-                if (model.state == Gamestates.LOSE):
+                if (self.model.state == Gamestates.LOSE):
                     if (event.key == pygame.K_SPACE):
                         pass
             if (event.type == pygame.QUIT):
