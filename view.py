@@ -44,11 +44,17 @@ class View():
         self.drawCursor()
 
     def drawRoom(self):
-        height = self.model.height//10*6
+        height = (self.model.height//10*6)
         width = (self.model.width//10*4)
-        y = (self.model.height//10*2)
-        x = (self.model.width//10*5) + 10
-        pygame.draw.rect(self.screen, (70,70,70), (x,y,width,height), 0, 5)
+        yOrigin = (self.model.height//10*2)
+        xOrigin = (self.model.width//10*5) + 10
+        pygame.draw.rect(self.screen, (70,70,70), (xOrigin,yOrigin,width,height), 5, 5)
+        for y in range(self.model.room.height):
+            cellHeight = y*(self.model.room.height//height)
+            pygame.draw.line(self.screen, (70,70,70), (xOrigin, y*cellHeight), (xOrigin+width, y*cellHeight), width=2)
+        for x in range(self.model.room.width):
+            pass
+
 
     def drawRecord(self):
         height = (self.model.height//10*6)
