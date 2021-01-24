@@ -13,7 +13,7 @@ class Model():
         self.menu = Selection([Option("New Game", Gamestates.GAMEPLAY),
                                Option("Continue", Gamestates.GAMEPLAY),
                                Option("Exit", Gamestates.EXIT)])
-        self.room = Room(3,9,20,4)
+        self.room = Room(5,10,20,4)
     
     def menuSelect(self):
         self.state = self.menu.getSelected().state

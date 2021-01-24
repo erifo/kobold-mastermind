@@ -1,6 +1,5 @@
 class Kobold():
-    def __init__(self, y, x, name, cid):
+    def __init__(self, y, x, cid):
         self.y = y
         self.x = x
-        self.name = name
         self.cid = cid
