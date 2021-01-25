@@ -9,25 +9,56 @@ class GameController():
         self.model = model
         self.view = view
         self.state_manager = StateManager()
+        self.state_manager.push(States.MENU)
 
     
     def update(self):
-        for event in pygame.event.get():
-            if (event.type == pygame.KEYDOWN):
-                state = self.state_manager.current()
-                if state == States.MENU:
-                    if (event.key == pygame.K_UP):
-                        pass
-                    elif (event.key == pygame.K_DOWN):
-                        pass
-                    elif (event.key == pygame.K_SPACE):
-                        pass
-                    self.view.draw_menu(self.model.menu)
-                elif state == States.GAME:
-                    pass
-                elif state == States.WIN:
-                    pass
-                elif state == States.LOSE:
-                    pass
-            elif (event.type == pygame.QUIT):
+        state = self.state_manager.current()
+        events = pygame.event.get()
+        keyboard_events = [e for e in events if e.type == pygame.KEYDOWN]
+        # ---
+        if state == States.MENU:
+            self.handle_menu(keyboard_events)
+            self.view.draw_menu(self.model.menu)
+        elif state == States.GAME:
+            pass
+        elif state == States.CONTINUE:
+            pass
+        elif state == States.WIN:
+            pass
+        elif state == States.LOSE:
+            pass
+        elif state == States.EXIT:
+            self.handle_exit()
+        # ---
+        for event in events:
+            if event.type == pygame.QUIT:
                 sys.exit()
+        pygame.display.flip()
+
+
+    def handle_menu(self, keyboard_events):
+        menu = self.model.menu
+        for event in keyboard_events:
+            if (event.key == pygame.K_UP):
+                menu.select_previous()
+            elif (event.key == pygame.K_DOWN):
+                menu.select_next()
+            elif (event.key == pygame.K_SPACE):
+                selected_state = menu.get_option_selected_state()
+                self.state_manager.push(selected_state)
+    
+    def handle_game(self, keyboard_events):
+        pass
+
+    def handle_continue(self, keyboard_events):
+        pass
+
+    def handle_win(self, keyboard_events):
+        pass
+
+    def handle_lose(self, keyboard_events):
+        pass
+
+    def handle_exit(self):
+        sys.exit()
