@@ -3,9 +3,9 @@ from game_view import GameView
 from game_controller import GameController
 
 def main():
-    model = GameModel() # Holds gamedata and business logic
-    view = GameView(800, 600) # Holds display-data and drawing-methods
-    controller = GameController(model, view) # Updates model, orders view.
+    model = GameModel()
+    view = GameView(800, 600)
+    controller = GameController(model, view)
     # ---
     while (True):
         controller.update()

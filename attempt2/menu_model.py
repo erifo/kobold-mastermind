@@ -1,5 +1,5 @@
 class MenuModel():
-    def __init__(self, options):
+    def __init__(self, *options):
         self.options = options
         self.selected = 0
     

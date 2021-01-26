@@ -20,8 +20,9 @@ class GameController():
         if state == States.MENU:
             self.handle_menu(keyboard_events)
             self.view.draw_menu(self.model.menu)
-        elif state == States.GAME:
-            pass
+        elif state == States.PLAY:
+            self.handle_play(keyboard_events)
+            self.view.draw_play(self.model.play)
         elif state == States.CONTINUE:
             pass
         elif state == States.WIN:
@@ -48,8 +49,21 @@ class GameController():
                 selected_state = menu.get_option_selected_state()
                 self.state_manager.push(selected_state)
     
-    def handle_game(self, keyboard_events):
-        pass
+    def handle_play(self, keyboard_events):
+        play = self.model.play
+        for event in keyboard_events:
+            if (event.key == pygame.K_UP):
+                pass
+            elif (event.key == pygame.K_DOWN):
+                pass
+            elif (event.key == pygame.K_LEFT):
+                pass
+            elif (event.key == pygame.K_RIGHT):
+                pass
+            elif (event.key == pygame.K_RETURN):
+                pass
+            elif (event.key == pygame.K_SPACE):
+                pass
 
     def handle_continue(self, keyboard_events):
         pass
