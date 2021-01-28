@@ -1,3 +1,4 @@
+from random import shuffle
 from circle_model import CircleModel
 from kobold_model import KoboldModel
 from cursor_model import CursorModel
@@ -12,10 +13,12 @@ class FloorModel():
     
     def init_circles(self, amount):
         circles = []
+        cids = [i for i in range(amount)]
+        shuffle(cids)
         for i in range(amount):
             x = (self.columns//amount*i) + 1
             y = self.rows//2
-            cid = i # Circle Identification
+            cid = cids[i] # Circle Identification
             circles.append(CircleModel(x,y,cid))
         return circles
 
@@ -75,7 +78,6 @@ class FloorModel():
             kobold = self.get_kobold_at(self.cursor.x, self.cursor.y)
             kobold.move(xmod, ymod)
         self.cursor.move(xmod, ymod)
-        print(self.cursor.x, self.cursor.y)
 
     def toggle_cursor_carry(self):
         if self.cursor.carrying:
