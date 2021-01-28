@@ -56,3 +56,29 @@ class FloorModel():
         if x == self.cursor.x and y == self.cursor.y:
             return True
         return False
+    
+    def is_in_grid(self, x, y):
+        if (x < 0 or x >= self.columns):
+            return False
+        if (y < 0 or y >= self.rows):
+            return False
+        return True
+    
+    def move_cursor(self, xmod, ymod):
+        xnew = self.cursor.x + xmod
+        ynew = self.cursor.y + ymod
+        if not self.is_in_grid(xnew, ynew):
+            return
+        if self.cursor.carrying:
+            if self.is_kobold_at(xnew, ynew):
+                return
+            kobold = self.get_kobold_at(self.cursor.x, self.cursor.y)
+            kobold.move(xmod, ymod)
+        self.cursor.move(xmod, ymod)
+        print(self.cursor.x, self.cursor.y)
+
+    def toggle_cursor_carry(self):
+        if self.cursor.carrying:
+            self.cursor.carrying = False
+        elif self.is_kobold_at(self.cursor.x, self.cursor.y):
+            self.cursor.carrying = True

@@ -3,3 +3,7 @@ class CursorModel():
         self.x = x
         self.y = y
         self.carrying = False
+    
+    def move(self, xmod, ymod):
+        self.x += xmod
+        self.y += ymod

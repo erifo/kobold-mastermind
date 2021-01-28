@@ -53,17 +53,17 @@ class GameController():
         play = self.model.play
         for event in keyboard_events:
             if (event.key == pygame.K_UP):
-                pass
+                play.move_cursor_up()
             elif (event.key == pygame.K_DOWN):
-                pass
+                play.move_cursor_down()
             elif (event.key == pygame.K_LEFT):
-                pass
+                play.move_cursor_left()
             elif (event.key == pygame.K_RIGHT):
-                pass
-            elif (event.key == pygame.K_RETURN):
-                pass
+                play.move_cursor_right()
             elif (event.key == pygame.K_SPACE):
-                pass
+                play.toggle_cursor_carry()
+            elif (event.key == pygame.K_RETURN):
+                pass #Confirming kobold order
 
     def handle_continue(self, keyboard_events):
         pass
