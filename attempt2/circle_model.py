@@ -1,5 +1,5 @@
 class CircleModel():
-    def __init__(self, x, y, cid):
+    def __init__(self, x, y, circle_id):
         self.x = x
         self.y = y
-        self.cid = cid
+        self.circle_id = circle_id

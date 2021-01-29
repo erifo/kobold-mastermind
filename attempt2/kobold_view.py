@@ -7,4 +7,4 @@ class KoboldView():
         self.size = 10
 
     def draw(self, x, y, model):
-        pygame.draw.rect(self.screen, self.colors[model.cid], (x,y,self.size,self.size))
+        pygame.draw.rect(self.screen, self.colors[model.color_id], (x,y,self.size,self.size))

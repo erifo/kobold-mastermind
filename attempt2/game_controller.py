@@ -26,7 +26,7 @@ class GameController():
         elif state == States.CONTINUE:
             pass
         elif state == States.WIN:
-            pass
+            self.view.draw_win()
         elif state == States.LOSE:
             pass
         elif state == States.EXIT:
@@ -63,7 +63,7 @@ class GameController():
             elif (event.key == pygame.K_SPACE):
                 play.toggle_cursor_carry()
             elif (event.key == pygame.K_RETURN):
-                pass #Confirming kobold order
+                play.make_guess(self.state_manager)
 
     def handle_continue(self, keyboard_events):
         pass

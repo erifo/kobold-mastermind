@@ -2,6 +2,7 @@ from random import shuffle
 from circle_model import CircleModel
 from kobold_model import KoboldModel
 from cursor_model import CursorModel
+from guess_model import GuessModel
 
 class FloorModel():
     def __init__(self, columns, rows):
@@ -13,22 +14,25 @@ class FloorModel():
     
     def init_circles(self, amount):
         circles = []
-        cids = [i for i in range(amount)]
-        shuffle(cids)
         for i in range(amount):
             x = (self.columns//amount*i) + 1
             y = self.rows//2
-            cid = cids[i] # Circle Identification
-            circles.append(CircleModel(x,y,cid))
+            circle_id = i # Circle Identification
+            circles.append(CircleModel(x,y,circle_id))
         return circles
 
     def init_kobolds(self, amount):
         kobolds = []
+        circle_ids = [i for i in range(amount)]
+        shuffle(circle_ids)
         for i in range(amount):
-            x = i
-            y = self.rows-1
-            cid = i # Circle Identification (for kobold)
-            kobolds.append(KoboldModel(x,y,cid))
+            #x = i
+            #y = self.rows-1
+            x = (self.columns//amount*i) + 1 #DEBUG
+            y = self.rows//2 #DEBUG
+            circle_id = circle_ids[i] # The circle that kobold belongs to.
+            color_id = i
+            kobolds.append(KoboldModel(x,y,circle_id, color_id))
         return kobolds
     
     def is_kobold_at(self, x, y):
@@ -84,3 +88,40 @@ class FloorModel():
             self.cursor.carrying = False
         elif self.is_kobold_at(self.cursor.x, self.cursor.y):
             self.cursor.carrying = True
+
+    def are_circles_filled(self):
+        for circle in self.circles:
+            filled = False
+            for kobold in self.kobolds:
+                if (kobold.x == circle.x and kobold.y == circle.y):
+                    filled = True
+            if not filled:
+                return False
+        return True
+    
+    def is_guess_correct(self):
+        for circle in self.circles:
+            kobold = self.get_kobold_at(circle.x, circle.y)
+            if not circle.circle_id == kobold.circle_id:
+                return False
+        return True
+    
+    def get_currently_correct_amount(self):
+        counter = 0
+        for circle in self.circles:
+            kobold = self.get_kobold_at(circle.x, circle.y)
+            if circle.circle_id == kobold.circle_id:
+                counter += 1
+        return counter
+    
+    def get_kobold_order(self):
+        kobolds = []
+        for circle in self.circles:
+            kobold = self.get_kobold_at(circle.x, circle.y)
+            kobolds.append(kobold)
+        return kobolds
+
+    def create_guess(self):
+        nr_of_correct = self.get_currently_correct_amount()
+        kobold_order = self.get_kobold_order()
+        return GuessModel(str(nr_of_correct), kobold_order)

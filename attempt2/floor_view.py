@@ -15,8 +15,8 @@ class FloorView():
         self.cursor_view = CursorView(self.screen)
 
     def draw(self, model):
-        x = ((self.window_width//4)*3) - (self.floor_width//2)
-        y = ((self.window_height//4)) - (self.floor_height//2)
+        x = ((self.window_width//2)) - (self.floor_width//2)
+        y = ((self.window_height//4)*3) - (self.floor_height//2)
         cell_size = self.floor_width//model.columns
         # ---
         # Grid
